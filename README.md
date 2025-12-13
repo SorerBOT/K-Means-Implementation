@@ -1,7 +1,7 @@
 # K-Means
 The K-Means algorithm takes a dataset comprised of points and an amount of _clusters_ noted $k$, and returns the $k$ _clusters_ of points that minimise the cumulative distance between all points in the same cluster.
 
-# How does it work?
+## How does it work?
 _Provided we have_ $k$ _initial points called "centroids", or that we have generated such points at random_
 The algorithm works by repeatedly performing the three following steps:
 
@@ -13,6 +13,6 @@ The process is deemed complete when an entire iteration is finished, without any
 
 # DBSCAN
 README is WIP
-# How does it work?
+## How does it work?
 README is WIP
 
