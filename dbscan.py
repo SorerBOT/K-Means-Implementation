@@ -57,26 +57,17 @@ def dbscan(points: list[Point], N_0: int, EPS: float):
                 cluster_j = next(cluster for cluster in clusters if core_points[j] in cluster)
 
                 new_cluster = cluster_i | cluster_j
-                if core_points[j] in cluster_i:
-                    break
-                else:
-                    clusters.remove(cluster_i)
-                    clusters.remove(cluster_j)
+                clusters.discard(cluster_i)
+                clusters.discard(cluster_j)
                 clusters.add(new_cluster)
-                did_join_clusters = True
-                break
 
     # Given a border point x_i\inB_EPS(x_j), "connect" it to the cluster of the core point x_j
     for border_point, core_point in border_points.items():
         cluster_core_point = next(cluster for cluster in clusters if core_point in cluster)
-        if border_point in cluster_core_point:
-            continue
-        else:
-            new_cluster = cluster_core_point | frozenset({ border_point })
-            clusters.remove(cluster_core_point)
-            clusters.add(new_cluster)
-            did_join_clusters = True
-            continue
+        new_cluster = cluster_core_point | frozenset({ border_point })
+        clusters.discard(cluster_core_point)
+        clusters.add(new_cluster)
+        continue
 
 
 
