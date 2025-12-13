@@ -22,7 +22,7 @@ def dbscan(points: list[Point], N_0: int, EPS: float):
     core_points: list[Point] = []
     border_points: dict[Point, Point] = {}
     noise_points: list[Point] = []
-    clusters: set[frozenset[Point]] = set(frozenset({ point }) for point in points)
+    clusters: set[frozenset[Point]]
 
     # Count points in proximity of each point
     for i in range(len(points)):
@@ -47,7 +47,9 @@ def dbscan(points: list[Point], N_0: int, EPS: float):
         noise_points.append(point)
 
     # Delete all noise points: collected them just to emphasis that...
-    noise_points = []
+    border_points_list = [border_point for border_point in border_points]
+    clusters = set(frozenset({ point }) for point in core_points + border_points_list)
+
 
     # Given two different core points x_i,x_j, such that x_i\inB_EPS(x_j), "connect" the two into two clusters
     for i in range(len(core_points)):
